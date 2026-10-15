@@ -47,10 +47,9 @@ The project uses the following Arduino libraries:
 Heart rate is calculated using the time interval between consecutive detected beats.
 
 Let:
-
-- \( \Delta t \) = time between two consecutive beats, in milliseconds
-- \(60{,}000\) = number of milliseconds in one minute
-- \(BPM\) = estimated beats per minute
+- **Δt** = time between two consecutive heartbeats, in milliseconds
+- **60,000** = number of milliseconds in one minute
+- **BPM** = estimated beats per minute
 
 The equation is:
 
