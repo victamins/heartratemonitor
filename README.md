@@ -53,18 +53,8 @@ Let:
 
 The equation is:
 
-\[
-\boxed{BPM = \frac{60{,}000}{\Delta t}}
-\]
+BPM = 60,000 / Δt
 
-For example, suppose two consecutive beats are detected 800 milliseconds apart.
-
-\[
-BPM = \frac{60{,}000}{800}
-= 75
-\]
-
-The estimated heart rate is **75 BPM**.
 
 The code implements this calculation as follows:
 
@@ -95,24 +85,25 @@ byte rates[RATE_SIZE] = {0};
 
 Each new accepted value is stored in a circular buffer. Once the buffer reaches its capacity, the oldest value is replaced by the newest.
 
-The average heart rate is calculated using:
+The average heart rate is calculated by adding all valid BPM readings and dividing by the total number of readings stored.
 
-\[
-\boxed{
-\overline{BPM} =
-\frac{1}{N}\sum_{i=1}^{N} BPM_i
-}
-\]
+Formula:
+Average BPM = (Sum of BPM readings) / N
 
-where \(N\) is the number of valid readings currently stored.
+where:
 
-For example, if the four stored readings are 74, 76, 75, and 77 BPM:
+N = Number of valid readings currently stored
+BPM readings = Individual heart rate measurements
 
-\[
-\overline{BPM}
-= \frac{74+76+75+77}{4}
-= 75.5
-\]
+Example:
+
+If the four stored readings are 74, 76, 75, and 77 BPM:
+
+Average BPM = (74 + 76 + 75 + 77) / 4
+
+Average BPM = 302 / 4 = 75.5 BPM
+
+The resulting average heart rate is 75.5 BPM.
 
 Because the code uses integer division when calculating the average, the displayed value is **75 BPM**.
 
@@ -137,12 +128,9 @@ if (millis() - lastDisplay >= 250) {
 ```
 
 The refresh frequency is approximately:
-
-\[
-f = \frac{1}{T}
-= \frac{1}{0.25}
-= 4 \text{ Hz}
-\]
+Frequency = 1 / Period
+          = 1 / 0.25
+          = 4 Hz
 
 This means the display updates approximately four times per second. Meanwhile, the main loop continues sampling the sensor between display updates.
 
